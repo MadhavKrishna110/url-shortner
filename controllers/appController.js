@@ -45,7 +45,16 @@ const getOriginalUrl = (req, res) => {
   return res.redirect(originalUrl);
 };
 
+const getAnalytics = (req, res) => {
+  const response = urlService.getAnalytics();
+  if (response) {
+    return res.status(200).json({ data: response });
+  }
+  return res.status(204).json({ message: "No data received" });
+};
+
 module.exports = {
   shortenUrl,
   getOriginalUrl,
+  getAnalytics,
 };

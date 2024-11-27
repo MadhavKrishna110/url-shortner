@@ -55,25 +55,36 @@ function shortenUrl(body) {
 
   urlLongToShortMap.set(url, {
     url: shortUrl,
-    expiry: Date.now() + duration * 1000 * 60,
   }); // taking duration as minutes
   urlShortToLongMap.set(shortUrl, {
     url: url,
+    createdAt: Date.now(),
     expiry: Date.now() + duration * 1000 * 60,
+    count: 0,
   });
   return shortUrl;
 }
 
 function getOriginalUrl(shortUrl) {
   checkAndRemoveExpiredUrl(shortUrl);
-  const longUrl = urlShortToLongMap.get(shortUrl)?.url;
-  if (longUrl) {
-    return longUrl;
+  const longUrlObj = urlShortToLongMap.get(shortUrl);
+  if (longUrlObj) {
+    longUrlObj.count++;
+    console.log("values", longUrlObj);
+    return longUrlObj.url;
   }
+}
+
+function getAnalytics() {
+  const arr = Array.from(urlShortToLongMap.entries()).filter(
+    ([key, value]) => value.count > 0
+  );
+  return arr;
 }
 
 export default {
   shortenUrl,
   getOriginalUrl,
+  getAnalytics,
   cronTask,
 };
