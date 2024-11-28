@@ -1,19 +1,25 @@
 # Node.js URL Shortener
 
 # Overview
-This is a lightweight URL shortening service implemented in Node.js. The project provides functionality to:
+This is a lightweight URL shortening service implemented in Node.js. 
 
-Generate short URLs
-Redirect to original long URLs
-Track URL analytics
-Automatically expire short URLs after a specified duration
+The project provides functionality to:
+1. Generate short URLs
+2. Redirect to original long URLs
+3. Track URL analytics
+4. Automatically expire short URLs after a specified duration
 
 # Features
 
-URL Shortening: Convert long URLs into compact, easy-to-share short URLs
-Time-Based Expiry: Set custom expiration times for shortened URLs
-Analytics Tracking: Monitor the number of times a short URL has been accessed
-Automatic Cleanup: Periodic removal of expired URL mappings
+1. URL Shortening: Convert long URLs into compact, easy-to-share short URLs
+2. Redirection: The shortened URL redirect the user to the original URL when
+accessed
+3. Unique URLs: Ensures that each long URL generates a unique short URL. If the same
+URL is submitted again, the same short URL can be reused
+4. Validation: The service should validate input to ensure the URL is valid
+5. Time-Based Expiry: Set custom expiration times for shortened URLs
+6. Analytics Tracking: Monitor the number of times a short URL has been accessed
+7. Automatic Cleanup: Periodic removal of expired URL mappings
 
 # Installation
 Prerequisites
@@ -24,11 +30,11 @@ npm (Node Package Manager)
 Steps
 
 Clone the repository:
-bashCopygit clone https://github.com/your-username/url-shortener.git
-cd url-shortener
+git clone https://github.com/MadhavKrishna110/url-shortener-backend.git
+cd url-shortener-backend
 
 Install dependencies:
-bashCopynpm install
+npm install
 
 
 # Usage
@@ -47,10 +53,10 @@ getAnalytics()
 
 # How It Works
 
-Each short URL is generated as a unique 12-character hexadecimal string
-URLs are automatically removed after the specified duration
-A cron job runs every minute to clean up expired URLs
-Tracking is maintained for URL access count
+1. Each short URL is generated as a unique 12-character hexadecimal string
+2. URLs are automatically removed after the specified duration
+3. A cron job runs every minute to clean up expired URLs
+4. Tracking is maintained for URL access count
 
 # Configuration
 
