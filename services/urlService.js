@@ -1,17 +1,9 @@
 import { randomBytes } from "crypto";
-import cron from "node-cron";
+
 const PORT = 8080;
 
 const urlLongToShortMap = new Map();
 const urlShortToLongMap = new Map();
-const ttlMap = new Map();
-
-const task = cron.schedule("*/1 * * * *", () => {
-  console.log("Running cron");
-  cronTask();
-});
-
-task.start();
 
 function cronTask() {
   console.log("initial size", urlLongToShortMap.size);
@@ -24,13 +16,7 @@ function cronTask() {
 function checkAndRemoveExpiredUrl(shortUrl) {
   const longUrlObj = urlShortToLongMap.get(shortUrl);
   const currTime = Date.now();
-  console.log(" url with time {} and expiry {}", currTime, longUrlObj?.expiry);
   if (longUrlObj && currTime >= longUrlObj.expiry) {
-    console.log(
-      "Deleting url with time {} and expiry {}",
-      currTime,
-      longUrlObj.expiry
-    );
     urlLongToShortMap.delete(longUrlObj.url);
     urlShortToLongMap.delete(shortUrl);
   }
