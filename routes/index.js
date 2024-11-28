@@ -1,15 +1,14 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const urlController = require("../controllers/appController");
-const validationMiddleware =
-  require("../middlewares/validationMiddleware").default;
+import urlController from "../controllers/appController.js";
+import validationMiddleware from "../middlewares/validationMiddleware.js";
 
 router.get("/url/:path", urlController.getOriginalUrl);
 router.get("/analytics", urlController.getAnalytics);
 router.post(
-  "/shorten",
+  "/short-url",
   validationMiddleware.preValidate,
   urlController.shortenUrl
 );
 
-module.exports = router;
+export default router;

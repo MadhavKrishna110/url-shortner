@@ -1,4 +1,4 @@
-const urlService = require("../services/urlService").default;
+import urlService from "../services/urlService.js";
 const PORT = 8080;
 const config = {
   host: `http://localhost:${PORT}`,
@@ -21,7 +21,7 @@ const shortenUrl = (req, res) => {
     });
   } catch (err) {
     console.error("Error in shorten Url:", { err });
-   return res.status(500).json({
+    return res.status(500).json({
       message: "Internal Server Error: Failed to generate a shortened URL.",
     });
   }
@@ -61,7 +61,7 @@ const getAnalytics = (req, res) => {
   }
 };
 
-module.exports = {
+export default {
   shortenUrl,
   getOriginalUrl,
   getAnalytics,

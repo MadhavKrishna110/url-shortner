@@ -41,7 +41,7 @@ function shortenUrl(body) {
 
   urlLongToShortMap.set(url, {
     url: shortUrl,
-  }); 
+  });
   urlShortToLongMap.set(shortUrl, {
     url: url,
     createdAt: Date.now(),
@@ -61,7 +61,8 @@ function getOriginalUrl(shortUrl) {
   }
 }
 
-function getAnalytics() { // Bonus Feature -> TO give the access count along with date created and date expired
+function getAnalytics() {
+  // Bonus Feature -> TO give the access count along with date created and date expired
   const arr = Array.from(urlShortToLongMap.entries()).filter(
     ([key, value]) => value.count > 0
   );

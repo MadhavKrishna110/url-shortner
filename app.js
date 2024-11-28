@@ -1,12 +1,15 @@
-var express = require("express");
-var cors = require("cors");
-var path = require("path");
-var logger = require("morgan");
-var cookieParser = require("cookie-parser");
+import express from "express";
+import cors from "cors";
+import path from "path";
+import logger from "morgan";
+import cookieParser from "cookie-parser";
+import { fileURLToPath } from "url";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 var app = express();
 
-var indexRouter = require("./routes/index");
+import indexRouter from "./routes/index.js";
 const PORT = 8080;
 
 // view engine setup
@@ -46,4 +49,4 @@ app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
-module.exports = app;
+export default app;
