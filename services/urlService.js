@@ -4,7 +4,7 @@ const PORT = 8080;
 
 const urlLongToShortMap = new Map();
 const urlShortToLongMap = new Map();
-
+// Bonus feature -> TTL Implemented
 function cronTask() {
   console.log("initial size", urlLongToShortMap.size);
   Array.from(urlShortToLongMap.entries()).forEach(([key, value]) => {
@@ -41,18 +41,18 @@ function shortenUrl(body) {
 
   urlLongToShortMap.set(url, {
     url: shortUrl,
-  }); // taking duration as minutes
+  }); 
   urlShortToLongMap.set(shortUrl, {
     url: url,
     createdAt: Date.now(),
-    expiry: Date.now() + duration * 1000 * 60,
+    expiry: Date.now() + duration * 1000 * 60, // taking duration as minutes for ease
     count: 0,
   });
   return shortUrl;
 }
 
 function getOriginalUrl(shortUrl) {
-  checkAndRemoveExpiredUrl(shortUrl);
+  checkAndRemoveExpiredUrl(shortUrl); // BONUS -> checking the expiry at function call too
   const longUrlObj = urlShortToLongMap.get(shortUrl);
   if (longUrlObj) {
     longUrlObj.count++;
@@ -61,7 +61,7 @@ function getOriginalUrl(shortUrl) {
   }
 }
 
-function getAnalytics() {
+function getAnalytics() { // Bonus Feature -> TO give the access count along with date created and date expired
   const arr = Array.from(urlShortToLongMap.entries()).filter(
     ([key, value]) => value.count > 0
   );
