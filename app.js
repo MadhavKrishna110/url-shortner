@@ -4,6 +4,9 @@ import path from "path";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from './swagger.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,10 +25,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(
   cors({
-    origin: "http://localhost:3000", // Explicitly allow your frontend origin
+    origin: ["http://localhost:3000","http://localhost:8080"], // Explicitly allow your frontend origin
     methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })

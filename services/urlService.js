@@ -56,7 +56,6 @@ function getOriginalUrl(shortUrl) {
   const longUrlObj = urlShortToLongMap.get(shortUrl);
   if (longUrlObj) {
     longUrlObj.count++;
-    console.log("values", longUrlObj);
     return longUrlObj.url;
   }
 }
