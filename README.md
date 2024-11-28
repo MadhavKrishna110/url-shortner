@@ -27,14 +27,24 @@ Prerequisites
 Node.js (v14 or higher)
 npm (Node Package Manager)
 
-Steps
+#Steps
 
 Clone the repository:
-git clone https://github.com/MadhavKrishna110/url-shortener-backend.git
-cd url-shortener-backend
+1. git clone https://github.com/MadhavKrishna110/url-shortener-backend.git
+2. cd url-shortener-backend
 
 Install dependencies:
-npm install
+3. npm install
+
+Run Application
+4. npm run start
+
+Open in Browser
+5. http://localhost:8080/api-docs
+
+6. Hit POST API /short-url to shorten a url with time-to-live as duration
+7. Hit GET API /url/:path to redirect to original url
+8. Hit GET API /analytics to get the analytics data
 
 
 # Usage
