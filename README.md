@@ -22,44 +22,58 @@ URL is submitted again, the same short URL can be reused
 7. Automatic Cleanup: Periodic removal of expired URL mappings
 
 # Installation
-Prerequisites
+## Prerequisites
 
-Node.js (v14 or higher)
-npm (Node Package Manager)
-
-#Steps
-
-Clone the repository:
-1. git clone https://github.com/MadhavKrishna110/url-shortener-backend.git
-2. cd url-shortener-backend
-
-Install dependencies:
-3. npm install
-
-Run Application
-4. npm run start
-
-Open in Browser
-5. http://localhost:8080/api-docs
-
-6. Hit POST API /short-url to shorten a url with time-to-live as duration
-7. Hit GET API /url/:path to redirect to original url
-8. Hit GET API /analytics to get the analytics data
+1. Node.js (v23 or higher)
+2. npm (Node Package Manager)
 
 
-# Usage
+## Steps
 
-Shortening a URL
-shortenUrl({
-  url: 'https://very-long-url.com/with-many-parameters',
-  duration: 60 // duration in minutes
-})
+1. Clone the repository: `git clone https://github.com/MadhavKrishna110/url-shortner-backend.git`
+2. Navigate to the project: `cd url-shortener-backend`
 
-Retrieving Original URL
-getOriginalUrl(shortUrl)
+3. Install dependencies: `npm install`
 
-Getting URL Analytics
-getAnalytics()
+4. Start the server: `npm run start`
+
+5. Open Swagger in browser: `http://localhost:8080/api-docs`
+
+6. Hit POST API /short-url to shorten a url.
+
+   Request Body:
+   ```
+     {
+        "url": // long url to be shortened
+        "duration": // TTL for long url (mins)
+     }
+   ```
+   Response:
+   ```
+     {
+        "message": // Success or failure message.
+        "url": // Shortened URL.
+     }
+   ```
+   
+8. Copy the short URL received in response of Step 6 and paste it in a new tab.
+9. Hit GET API /analytics to get the analytics data for URLs present in the system.
+   
+   Response:
+   ```
+    {
+    "data": [
+        {
+            "shortUrl": // short URL,
+            "longUrl": //long URL,
+            "createdAt": // created Time,
+            "expiry": // expire time,
+            "hitCount": // hitCount
+        }
+    ]
+   }
+   ```
+
 
 # How It Works
 

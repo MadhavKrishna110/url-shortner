@@ -62,9 +62,15 @@ function getOriginalUrl(shortUrl) {
 
 function getAnalytics() {
   // Bonus Feature -> TO give the access count along with date created and date expired
-  const arr = Array.from(urlShortToLongMap.entries()).filter(
-    ([key, value]) => value.count > 0
-  );
+  const arr = Array.from(urlShortToLongMap.entries()).map(([key,value]) => {
+    return {
+      shortUrl: `http://localhost:${PORT}/url/${key}`,
+      longUrl: value.url,
+      createdAt: new Date(value.createdAt),
+      expiry: new Date(value.expiry),
+      hitCount: value.count
+    }
+  });
   return arr;
 }
 
