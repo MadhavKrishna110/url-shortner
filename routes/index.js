@@ -35,7 +35,6 @@ router.get("/analytics", urlController.getAnalytics);
  *    post:
  *     summary: redirect to the original URL from short URL
  *     requestBody:
- *          description: Create a new pet in the store
  *          required: true
  *          content:
  *           application/json:
