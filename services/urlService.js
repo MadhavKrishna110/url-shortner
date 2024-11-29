@@ -71,7 +71,6 @@ function getAnalytics() {
       hitCount: value.count
     }
   });
-  return arr;
 }
 
 export default {

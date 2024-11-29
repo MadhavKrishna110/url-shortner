@@ -4,9 +4,9 @@ import path from "path";
 import logger from "morgan";
 import cookieParser from "cookie-parser";
 import { fileURLToPath } from "url";
-import swaggerUi from 'swagger-ui-express';
-import swaggerSpec from './swagger.js';
-
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./swagger.js";
+import createError from "http-errors";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,6 +14,12 @@ var app = express();
 
 import indexRouter from "./routes/index.js";
 const PORT = 8080;
+
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Explicitly allow your frontend origin
+  })
+);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -25,15 +31,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use(
-  cors({
-    origin: ["http://localhost:3000","http://localhost:8080"], // Explicitly allow your frontend origin
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-  })
-);
+// app.use(cors());
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
